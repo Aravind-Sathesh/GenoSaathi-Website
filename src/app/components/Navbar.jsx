@@ -7,12 +7,13 @@ import Image from 'next/image';
 
 export default function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
+	
+	const [hoveredIndex, setHoveredIndex] = useState(null);
 
 	const navLinks = [
-		{ href: '/', label: 'Home' },
-		{ href: '/about', label: 'About' },
+		{ href: '/#home', label: 'Home' },
+		{ href: '/#how-it-works', label: 'How It Works' },
 		{ href: '/services', label: 'Services' },
-		{ href: '/how-it-works', label: 'How It Works' },
 		{ href: '/blog', label: 'Blog' },
 		{ href: '/contact', label: 'Contact' },
 	];
@@ -45,7 +46,6 @@ export default function Navbar() {
 						</Link>
 					</motion.div>
 
-					{/* Desktop Navigation */}
 					<div className='hidden md:block'>
 						<div className='ml-10 flex items-baseline space-x-4'>
 							{navLinks.map((link, index) => (
@@ -57,23 +57,28 @@ export default function Navbar() {
 										duration: 0.5,
 										delay: index * 0.1,
 									}}
+									onMouseEnter={() => setHoveredIndex(index)}
+									onMouseLeave={() => setHoveredIndex(null)}
+									className="relative" 
 								>
 									<Link
 										href={link.href}
-										className='text-neutral-300 hover:text-pink-200 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 relative group'
+										className='text-neutral-300 hover:text-pink-200 px-0 mx-2 py-2 rounded-md text-sm font-medium transition-colors duration-200'
 									>
 										{link.label}
-										<motion.div
-											className='absolute bottom-0 left-0 w-0 h-0.5 bg-pink-200 group-hover:w-full transition-all duration-300'
-											whileHover={{ width: '100%' }}
-										/>
 									</Link>
+									<motion.div
+										className="absolute -bottom-1 left-0 w-full h-0.5 bg-pink-200"
+										initial={{ scaleX: 0 }}
+										animate={{ scaleX: hoveredIndex === index ? 1 : 0 }}
+										transition={{ duration: 0.2, ease: "easeIn" }}
+                                        style={{ transformOrigin: 'center' }}
+									/>
 								</motion.div>
 							))}
 						</div>
 					</div>
 
-					{/* Mobile menu button */}
 					<div className='md:hidden'>
 						<motion.button
 							onClick={toggleMenu}
@@ -112,7 +117,6 @@ export default function Navbar() {
 				</div>
 			</div>
 
-			{/* Mobile Navigation Menu */}
 			<AnimatePresence>
 				{isOpen && (
 					<motion.div
