@@ -1,16 +1,20 @@
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 
-const geistSans = Geist({
-	variable: '--font-geist-sans',
+const inter = Inter({
 	subsets: ['latin'],
+	display: 'swap',
+	variable: '--font-inter',
+	weight: ['400', '500', '700'],
 });
 
-const geistMono = Geist_Mono({
-	variable: '--font-geist-mono',
+const poppins = Poppins({
 	subsets: ['latin'],
+	display: 'swap',
+	variable: '--font-poppins',
+	weight: ['400', '500', '600', '700', '800'],
 });
 
 export const metadata = {
@@ -22,7 +26,7 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang='en'>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${inter.variable} ${poppins.variable} antialiased`}
 			>
 				<Navbar />
 				<main>{children}</main>
