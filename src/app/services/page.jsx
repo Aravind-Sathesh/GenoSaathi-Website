@@ -3,9 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import {
-	Heart,
 	Dna,
-	MessageSquareHeart,
 	UsersRound,
 	Stethoscope,
 	ArrowRight,
@@ -40,26 +38,18 @@ const containerVariants = {
 	hidden: { opacity: 0 },
 	visible: {
 		opacity: 1,
-		transition: {
-			staggerChildren: 0.2,
-		},
+		transition: { staggerChildren: 0.2 },
 	},
 };
 
 const itemVariants = {
 	hidden: { opacity: 0, y: 20 },
-	visible: {
-		opacity: 1,
-		y: 0,
-		transition: {
-			duration: 0.5,
-		},
-	},
+	visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
 };
 
 export default function ServicesPage() {
 	return (
-		<div className='min-h-screen bg-[#EEEEEE] text-[#222222] font-sans'>
+		<div className='min-h-screen bg-[#EEEEEE] text-[#222222]'>
 			{/* Page Header Section */}
 			<motion.div
 				initial={{ opacity: 0 }}
@@ -77,7 +67,8 @@ export default function ServicesPage() {
 						initial={{ y: 20, opacity: 0 }}
 						animate={{ y: 0, opacity: 1 }}
 						transition={{ duration: 0.5, delay: 0.1 }}
-						className='text-5xl sm:text-6xl font-bold font-poppins mb-4'
+						// REMOVED: font-poppins class to rely on global CSS
+						className='text-5xl sm:text-6xl font-bold mb-4'
 						style={{ textShadow: '0 2px 4px rgba(0,0,0,0.05)' }}
 					>
 						Our Core Services
@@ -107,17 +98,14 @@ export default function ServicesPage() {
 					{servicesData.map((service, index) => (
 						<motion.div
 							key={index}
-							className='group cursor-pointer'
+							className='group cursor-pointer h-full'
 							variants={itemVariants}
-							whileHover={{ scale: 1.05 }}
-							transition={{
-								type: 'spring',
-								stiffness: 300,
-								damping: 20,
-							}}
+							whileHover={{ y: -8 }}
+							transition={{ type: 'tween', ease: 'easeInOut' }}
+							style={{ willChange: 'transform' }}
 						>
 							<div
-								className='p-8 rounded-[2rem] h-full flex flex-col transition-all duration-500 hover:shadow-2xl relative overflow-hidden'
+								className='p-8 rounded-[2rem] h-full flex flex-col relative overflow-hidden'
 								style={{
 									background:
 										'linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%)',
@@ -129,7 +117,6 @@ export default function ServicesPage() {
 									style={{ background: '#FCCFE8' }}
 								></div>
 
-								{/* Icon */}
 								<div className='mb-6'>
 									<div
 										className='w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 group-hover:scale-110 group-hover:rotate-6'
@@ -146,8 +133,8 @@ export default function ServicesPage() {
 										/>
 									</div>
 								</div>
-
-								<h3 className='text-2xl font-bold font-poppins mb-4 text-[#222222]'>
+								{/* REMOVED: font-poppins class from h3 */}
+								<h3 className='text-2xl font-bold mb-4 text-[#222222]'>
 									{service.title}
 								</h3>
 								<p className='text-neutral-600 leading-relaxed flex-grow'>
@@ -184,22 +171,21 @@ export default function ServicesPage() {
 				>
 					<div className='absolute inset-0 bg-black/20'></div>
 					<div className='relative'>
-						<h2 className='text-4xl font-bold font-poppins text-white mb-4'>
+						{/* REMOVED: font-poppins class from h2 */}
+						<h2 className='text-4xl font-bold text-white mb-4'>
 							Ready to Find Your Perfect Match?
 						</h2>
-						<p className='text-lg text-neutral-300 max-w-2xl mx-auto mb-8'>
+						<p className='text-lg text-white/80 max-w-2xl mx-auto mb-8'>
 							Begin your science-backed journey to a more
 							fulfilling relationship today.
 						</p>
 						<Link href='/contact'>
 							<motion.button
-								className='bg-white text-black font-poppins font-bold py-3 px-8 rounded-full inline-flex items-center text-lg shadow-lg'
-								whileHover={{
-									scale: 1.05,
-									boxShadow:
-										'0px 10px 20px rgba(255, 255, 255, 0.2)',
-								}}
+								// REMOVED: font-poppins class
+								className='bg-white text-black font-bold py-3 px-8 rounded-full inline-flex items-center text-lg shadow-lg'
+								whileHover={{ scale: 1.05 }}
 								whileTap={{ scale: 0.95 }}
+								style={{ willChange: 'transform' }}
 							>
 								<Sparkles className='w-5 h-5 mr-2 text-pink-400' />
 								Get Started
