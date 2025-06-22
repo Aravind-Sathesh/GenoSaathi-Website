@@ -1,0 +1,38 @@
+[
+	{
+		"name": "Deepti Kaushik",
+		"role": "Co-Founder & CTO",
+		"img": "/team-member-profiles/image-1.png",
+		"bio": "Postgraduate in biotechnology and PhD candidate at BITS Pilani. Leading innovation behind genetic compatibility matching.",
+		"socials": [
+			{
+				"type": "linkedin",
+				"url": "https://linkedin.com",
+				"icon": "Linkedin"
+			},
+			{
+				"type": "twitter",
+				"url": "https://twitter.com",
+				"icon": "Twitter"
+			}
+		]
+	},
+	{
+		"name": "Vidit Kaushik",
+		"role": "Co-Founder & CEO",
+		"img": "/team-member-profiles/image-2.png",
+		"bio": "M.Sc. in Biological Sciences at BITS Pilani. Bridging the gap between cutting-edge science and meaningful relationships.",
+		"socials": [
+			{
+				"type": "linkedin",
+				"url": "https://linkedin.com",
+				"icon": "Linkedin"
+			},
+			{
+				"type": "twitter",
+				"url": "https://twitter.com",
+				"icon": "Twitter"
+			}
+		]
+	}
+]

@@ -1,0 +1,22 @@
+[
+	{
+		"title": "Sample Collection",
+		"desc": "Simple, convenient sample collection by our certified experts at your preferred location.",
+		"icon": "Shield"
+	},
+	{
+		"title": "Genetic Analysis",
+		"desc": "Advanced laboratory analysis using cutting-edge algorithms to assess genetic compatibility.",
+		"icon": "Zap"
+	},
+	{
+		"title": "Profile Creation",
+		"desc": "Personalized profile integration combining genetic data with your lifestyle preferences.",
+		"icon": "Users"
+	},
+	{
+		"title": "Find Your Match",
+		"desc": "Discover scientifically-compatible partners with detailed compatibility scores and insights.",
+		"icon": "Heart"
+	}
+]
