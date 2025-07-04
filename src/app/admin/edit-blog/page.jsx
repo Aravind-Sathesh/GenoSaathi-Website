@@ -132,7 +132,7 @@ export default function EditBlogPage() {
 			<motion.div
 				initial={{ opacity: 0 }}
 				animate={{ opacity: 1 }}
-				className='min-h-screen flex items-center justify-center bg-gray-100 text-gray-900'
+				className='min-h-screen flex items-center justify-center bg-gray-100 text-gray-900 px-4'
 			>
 				<div className='w-full max-w-sm p-8 space-y-6 bg-white rounded-3xl shadow-2xl'>
 					<div className='text-center'>
@@ -171,17 +171,17 @@ export default function EditBlogPage() {
 	}
 
 	return (
-		<div className='min-h-screen bg-gray-100 text-gray-900 p-4 sm:p-8'>
+		<div className='min-h-screen bg-gray-100 text-gray-900 p-4 sm:p-6 lg:p-8'>
 			<div className='max-w-7xl mx-auto'>
-				<div className='flex flex-col sm:flex-row justify-between items-start sm:items-center mb-8 gap-4'>
-					<h1 className='text-4xl font-bold font-poppins text-gray-900'>
+				<div className='flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4'>
+					<h1 className='text-3xl md:text-4xl font-bold font-poppins text-gray-900'>
 						Blog Editor
 					</h1>
-					<div className='flex items-center gap-4'>
+					<div className='grid grid-cols-[1fr_auto] gap-2 sm:gap-4 w-full md:w-auto md:max-w-md'>
 						<select
 							onChange={handleBlogSelect}
 							value={selectedBlogId}
-							className='p-3 border border-gray-300 rounded-md bg-white focus:ring-pink-500 focus:border-pink-500'
+							className='w-full p-3 border border-gray-300 rounded-md bg-white focus:ring-pink-500 focus:border-pink-500 col-span-1 truncate'
 						>
 							<option value=''>-- Create New Post --</option>
 							{allBlogs.map((blog) => (
@@ -195,7 +195,7 @@ export default function EditBlogPage() {
 								setSelectedBlogId('');
 								setPost(emptyPost);
 							}}
-							className='p-3 bg-gray-200 hover:bg-gray-300 rounded-md'
+							className='p-3 bg-gray-200 hover:bg-gray-300 rounded-md flex items-center justify-center col-span-1'
 							title='Clear Form'
 						>
 							<FilePlus className='w-5 h-5' />
@@ -203,10 +203,11 @@ export default function EditBlogPage() {
 					</div>
 				</div>
 
-				<div className='grid grid-cols-1 lg:grid-cols-2 gap-8'>
+				{/* --- Responsive Grid --- */}
+				<div className='grid grid-cols-1 xl:grid-cols-2 gap-8'>
 					{/* Form Input Side */}
-					<div className='space-y-4 p-8 bg-white rounded-3xl shadow-xl'>
-						<h2 className='text-2xl font-poppins font-bold text-gray-800 flex items-center'>
+					<div className='space-y-4 p-6 sm:p-8 bg-white rounded-3xl shadow-xl'>
+						<h2 className='text-xl sm:text-2xl font-poppins font-bold text-gray-800 flex items-center'>
 							{selectedBlogId ? (
 								<Edit className='w-6 h-6 mr-3 text-pink-500' />
 							) : (
@@ -248,7 +249,6 @@ export default function EditBlogPage() {
 							className='w-full p-3 border border-gray-300 rounded-md focus:ring-pink-500 focus:border-pink-500 bg-gray-50'
 							rows={3}
 						></textarea>
-
 						<textarea
 							name='content'
 							value={post.content}
@@ -257,7 +257,6 @@ export default function EditBlogPage() {
 							className='w-full p-3 border border-gray-300 rounded-md font-mono text-sm bg-gray-50'
 							rows={15}
 						/>
-
 						<input
 							name='tags'
 							value={post.tags}
@@ -275,7 +274,8 @@ export default function EditBlogPage() {
 
 						{error && (
 							<p className='text-sm text-red-600 p-3 bg-red-100 rounded-md'>
-								{error}
+								{' '}
+								{error}{' '}
 							</p>
 						)}
 						{successMessage && (
@@ -303,8 +303,8 @@ export default function EditBlogPage() {
 					</div>
 
 					{/* Markdown Preview Side */}
-					<div className='sticky top-8 p-8 bg-white rounded-3xl shadow-xl'>
-						<h2 className='text-2xl font-poppins font-bold border-b border-gray-200 pb-3 mb-4 text-gray-800'>
+					<div className='p-6 sm:p-8 bg-white rounded-3xl shadow-xl xl:sticky xl:top-8'>
+						<h2 className='text-xl sm:text-2xl font-poppins font-bold border-b border-gray-200 pb-3 mb-4 text-gray-800'>
 							Live Preview
 						</h2>
 						<article className='prose prose-lg max-w-none prose-pink prose-headings:font-poppins'>
