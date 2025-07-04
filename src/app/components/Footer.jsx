@@ -10,6 +10,13 @@ import {
 	Mail,
 } from 'lucide-react';
 
+const navLinks = [
+	{ href: '/#home', label: 'Home' },
+	{ href: '/services', label: 'Services' },
+	{ href: '/blog', label: 'Blog' },
+	{ href: '/contact', label: 'Contact' },
+];
+
 export default function Footer() {
 	return (
 		<footer className='bg-black border-t border-neutral-800 text-neutral-300'>
@@ -38,15 +45,7 @@ export default function Footer() {
 						</p>
 						<div className='flex space-x-4'>
 							<a
-								href='#'
-								target='_blank'
-								rel='noopener noreferrer'
-								className='text-neutral-400 hover:text-pink-200 transition-colors'
-							>
-								<Twitter size={20} strokeWidth={1.5} />
-							</a>
-							<a
-								href='#'
+								href='https://www.linkedin.com/company/genosaathi/'
 								target='_blank'
 								rel='noopener noreferrer'
 								className='text-neutral-400 hover:text-pink-200 transition-colors'
@@ -57,7 +56,15 @@ export default function Footer() {
 								href='#'
 								target='_blank'
 								rel='noopener noreferrer'
-								className='text-neutral-400 hover:text-pink-200 transition-colors'
+								className='text-neutral-600 transition-colors' // Add 'hover:text-pink-200' and change 'neutral-600' to 'neutral-400' when active
+							>
+								<Twitter size={20} strokeWidth={1.5} />
+							</a>
+							<a
+								href='#'
+								target='_blank'
+								rel='noopener noreferrer'
+								className='text-neutral-600 transition-colors' // Add 'hover:text-pink-200' and change 'neutral-600' to 'neutral-400' when active
 							>
 								<Instagram size={20} strokeWidth={1.5} />
 							</a>
@@ -65,7 +72,7 @@ export default function Footer() {
 								href='#'
 								target='_blank'
 								rel='noopener noreferrer'
-								className='text-neutral-400 hover:text-pink-200 transition-colors'
+								className='text-neutral-600 transition-colors' // Add 'hover:text-pink-200' and change 'neutral-600' to 'neutral-400' when active
 							>
 								<Facebook size={20} strokeWidth={1.5} />
 							</a>
@@ -75,41 +82,19 @@ export default function Footer() {
 					{/* Column 2: Company Links */}
 					<div className='space-y-4'>
 						<h3 className='text-lg font-semibold text-white'>
-							Company
+							Navigation
 						</h3>
 						<ul className='space-y-2'>
-							<li>
-								<Link
-									href='/about'
-									className='text-neutral-400 hover:text-pink-200 transition-colors'
-								>
-									About Us
-								</Link>
-							</li>
-							<li>
-								<Link
-									href='/services'
-									className='text-neutral-400 hover:text-pink-200 transition-colors'
-								>
-									Services
-								</Link>
-							</li>
-							<li>
-								<Link
-									href='/blog'
-									className='text-neutral-400 hover:text-pink-200 transition-colors'
-								>
-									Blog
-								</Link>
-							</li>
-							<li>
-								<Link
-									href='#'
-									className='text-neutral-400 hover:text-pink-200 transition-colors'
-								>
-									How It Works
-								</Link>
-							</li>
+							{navLinks.map((link) => (
+								<li key={link.href}>
+									<Link
+										href={link.href}
+										className='text-neutral-400 hover:text-pink-200 transition-colors'
+									>
+										{link.label}
+									</Link>
+								</li>
+							))}
 						</ul>
 					</div>
 
@@ -119,22 +104,6 @@ export default function Footer() {
 							Support
 						</h3>
 						<ul className='space-y-2'>
-							<li>
-								<Link
-									href='/contact'
-									className='text-neutral-400 hover:text-pink-200 transition-colors'
-								>
-									Contact Us
-								</Link>
-							</li>
-							<li>
-								<Link
-									href='/faq'
-									className='text-neutral-400 hover:text-pink-200 transition-colors'
-								>
-									FAQ
-								</Link>
-							</li>
 							<li>
 								<Link
 									href='/privacy-policy'
