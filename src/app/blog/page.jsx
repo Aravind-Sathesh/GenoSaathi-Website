@@ -3,12 +3,14 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Calendar, User, LoaderCircle } from 'lucide-react';
+import { ArrowRight, Calendar, User, LoaderCircle, Search } from 'lucide-react';
 
 export default function BlogPage() {
 	const [blogs, setBlogs] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [error, setError] = useState(null);
+	const [searchTerm, setSearchTerm] = useState('');
+	const [filteredBlogs, setFilteredBlogs] = useState([]);
 
 	useEffect(() => {
 		const fetchBlogs = async () => {
@@ -19,6 +21,7 @@ export default function BlogPage() {
 				}
 				const data = await res.json();
 				setBlogs(data);
+				setFilteredBlogs(data);
 			} catch (err) {
 				setError(err.message);
 			} finally {
@@ -28,6 +31,19 @@ export default function BlogPage() {
 
 		fetchBlogs();
 	}, []);
+
+	useEffect(() => {
+		const results = blogs.filter(
+			(blog) =>
+				blog.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+				blog.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+				(blog.tags &&
+					blog.tags.some((tag) =>
+						tag.toLowerCase().includes(searchTerm.toLowerCase())
+					))
+		);
+		setFilteredBlogs(results);
+	}, [searchTerm, blogs]);
 
 	const containerVariants = {
 		hidden: { opacity: 0 },
@@ -84,8 +100,23 @@ export default function BlogPage() {
 				</div>
 			</motion.div>
 
+			<div className='py-12 px-4'>
+				<div className='max-w-xl mx-auto'>
+					<div className='relative'>
+						<input
+							type='text'
+							placeholder='Search articles by title, content, or tag...'
+							value={searchTerm}
+							onChange={(e) => setSearchTerm(e.target.value)}
+							className='w-full pl-12 pr-4 py-4 border border-gray-300 rounded-full bg-white text-lg focus:ring-2 focus:ring-pink-400 focus:border-pink-400 outline-none transition'
+						/>
+						<Search className='absolute left-4 top-1/2 -translate-y-1/2 w-6 h-6 text-gray-400' />
+					</div>
+				</div>
+			</div>
+
 			{/* Blog Grid */}
-			<div className='py-24 px-4'>
+			<div className='pb-24 px-4'>
 				<div className='max-w-7xl mx-auto'>
 					{isLoading ? (
 						<div className='flex justify-center items-center h-40'>
@@ -102,82 +133,99 @@ export default function BlogPage() {
 							initial='hidden'
 							animate='visible'
 						>
-							{blogs.map((blog) => (
-								<motion.div
-									key={blog.id}
-									variants={itemVariants}
-									className='group'
-								>
-									<Link
-										href={`/blog/${blog.slug}`}
-										className='h-full'
+							{filteredBlogs.length > 0 ? (
+								filteredBlogs.map((blog) => (
+									<motion.div
+										key={blog.id}
+										variants={itemVariants}
+										className='group'
 									>
-										<div
-											className='h-full flex flex-col rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2'
-											style={{
-												background: '#ffffff',
-												boxShadow:
-													'0 20px 40px rgba(0,0,0,0.07)',
-											}}
+										<Link
+											href={`/blog/${blog.slug}`}
+											className='h-full'
 										>
-											<div className='p-6 flex flex-col flex-grow'>
-												{/* NEW: Tags section at the top */}
-												{blog.tags &&
-													Array.isArray(blog.tags) &&
-													blog.tags.length > 0 && (
-														<div className='flex flex-wrap gap-2 mb-4'>
-															{blog.tags
-																.slice(0, 3)
-																.map((tag) => (
-																	<span
-																		key={
+											<div
+												className='h-full flex flex-col rounded-[2rem] overflow-hidden transition-all duration-500 hover:shadow-2xl hover:-translate-y-2'
+												style={{
+													background: '#ffffff',
+													boxShadow:
+														'0 20px 40px rgba(0,0,0,0.07)',
+												}}
+											>
+												<div className='p-6 flex flex-col flex-grow'>
+													{blog.tags &&
+														Array.isArray(
+															blog.tags
+														) &&
+														blog.tags.length >
+															0 && (
+															<div className='flex flex-wrap gap-2 mb-4'>
+																{blog.tags
+																	.slice(0, 3)
+																	.map(
+																		(
 																			tag
-																		}
-																		className='bg-[#FCCFE8] text-[#d64a8b] text-xs font-semibold px-2.5 py-1 rounded-full'
-																	>
-																		{tag}
-																	</span>
-																))}
+																		) => (
+																			<span
+																				key={
+																					tag
+																				}
+																				className='bg-[#FCCFE8] text-[#d64a8b] text-xs font-semibold px-2.5 py-1 rounded-full'
+																			>
+																				{
+																					tag
+																				}
+																			</span>
+																		)
+																	)}
+															</div>
+														)}
+
+													<h3 className='text-xl font-bold font-poppins mb-3 text-[#222222] leading-snug'>
+														{blog.title}
+													</h3>
+
+													<p className='text-[#555555] leading-relaxed text-sm flex-grow mb-4'>
+														{blog.excerpt}
+													</p>
+
+													<div className='mt-auto pt-4 border-t border-gray-100 flex justify-between items-center'>
+														<div className='flex items-center text-xs text-[#555555] space-x-3'>
+															<span className='flex items-center'>
+																<Calendar className='w-4 h-4 mr-1.5' />
+																{new Date(
+																	blog.created_at
+																).toLocaleDateString(
+																	'en-US',
+																	{
+																		month: 'short',
+																		day: 'numeric',
+																		year: 'numeric',
+																	}
+																)}
+															</span>
+															<span className='flex items-center'>
+																<User className='w-4 h-4 mr-1.5' />
+																{blog.author}
+															</span>
 														</div>
-													)}
-
-												<h3 className='text-xl font-bold font-poppins mb-3 text-[#222222] leading-snug'>
-													{blog.title}
-												</h3>
-
-												<p className='text-[#555555] leading-relaxed text-sm flex-grow mb-4'>
-													{blog.excerpt}
-												</p>
-
-												<div className='mt-auto pt-4 border-t border-gray-100 flex justify-between items-center'>
-													<div className='flex items-center text-xs text-[#555555] space-x-3'>
-														<span className='flex items-center'>
-															<Calendar className='w-4 h-4 mr-1.5' />
-															{new Date(
-																blog.created_at
-															).toLocaleDateString(
-																'en-US',
-																{
-																	month: 'short',
-																	day: 'numeric',
-																	year: 'numeric',
-																}
-															)}
-														</span>
-														<span className='flex items-center'>
-															<User className='w-4 h-4 mr-1.5' />
-															{blog.author}
+														<span className='font-bold text-[#d64a8b] inline-flex items-center group-hover:text-[#c03974] transition-colors'>
+															<ArrowRight className='w-5 h-5 transition-transform duration-300 group-hover:translate-x-1' />
 														</span>
 													</div>
-													<span className='font-bold text-[#d64a8b] inline-flex items-center group-hover:text-[#c03974] transition-colors'>
-														<ArrowRight className='w-5 h-5 transition-transform duration-300 group-hover:translate-x-1' />
-													</span>
 												</div>
 											</div>
-										</div>
-									</Link>
-								</motion.div>
-							))}
+										</Link>
+									</motion.div>
+								))
+							) : (
+								<div className='col-span-1 md:col-span-2 lg:col-span-3 text-center text-gray-500 py-16'>
+									<h3 className='text-2xl font-poppins'>
+										No posts found
+									</h3>
+									<p>Try adjusting your search term.</p>
+								</div>
+							)}
 						</motion.div>
 					)}
 				</div>
