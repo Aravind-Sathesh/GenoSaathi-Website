@@ -156,27 +156,27 @@ export default function ContactPage() {
 						</form>
 					</motion.div>
 
-					{/* Contact Info */}
-					<div className='flex flex-col gap-8 h-full'>
-						<motion.div
-							variants={itemVariants}
-							className='bg-white rounded-3xl shadow-xl p-8 border border-gray-100 flex items-center space-x-4'
-						>
-							<div className='bg-[#FCCFE8] p-3 rounded-full shadow-lg flex-shrink-0'>
-								<Phone className='w-6 h-6 text-[#222222]' />
-							</div>
-							<div>
-								<h3 className='font-poppins text-xl font-semibold text-[#222222]'>
-									Phone
-								</h3>
-								<Link
-									href='tel:+9672353320'
-									className='font-inter text-[#555555] text-lg hover:text-[#d64a8b] transition-colors'
-								>
-									+91 9672353320
-								</Link>
-							</div>
-						</motion.div>
+          {/* Contact Info */}
+          <div className='flex flex-col gap-8 h-full'>
+            <motion.div
+              variants={itemVariants}
+              className='bg-white rounded-3xl shadow-xl p-8 border border-gray-100 flex items-center space-x-4'
+            >
+              <div className='bg-[#FCCFE8] p-3 rounded-full shadow-lg flex-shrink-0'>
+                <Phone className='w-6 h-6 text-[#222222]' />
+              </div>
+              <div>
+                <h3 className='font-poppins text-xl font-semibold text-[#222222]'>
+                  Phone
+                </h3>
+                <Link
+                  href='tel:+967XXXX320'
+                  className='font-inter text-[#555555] text-lg hover:text-[#d64a8b] transition-colors'
+                >
+                  +91 967XXXX320
+                </Link>
+              </div>
+            </motion.div>
 
 						<motion.div
 							variants={itemVariants}

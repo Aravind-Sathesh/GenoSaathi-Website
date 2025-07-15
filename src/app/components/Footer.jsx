@@ -123,52 +123,50 @@ export default function Footer() {
 						</ul>
 					</div>
 
-					{/* Column 4: Contact Information */}
-					<div className='space-y-4'>
-						<h3 className='text-lg font-semibold text-white'>
-							Get in Touch
-						</h3>
-						<ul className='space-y-3 text-neutral-400'>
-							<li className='flex items-start'>
-								<MapPin
-									className='mt-1 mr-3 flex-shrink-0 text-pink-200'
-									size={20}
-									strokeWidth={1.5}
-								/>
-								<span>
-									BITS Pilani, Pilani Campus, Vidya Vihar,
-									Pilani 333031, Rajasthan, India
-								</span>
-							</li>
-							<li className='flex items-center'>
-								<Mail
-									className='mr-3 flex-shrink-0 text-pink-200'
-									size={20}
-									strokeWidth={1.5}
-								/>
-								<a
-									href='mailto:genosaathi@gmail.com'
-									className='hover:text-pink-200 transition-colors'
-								>
-									genosaathi@gmail.com
-								</a>
-							</li>
-							<li className='flex items-center'>
-								<Phone
-									className='mr-3 flex-shrink-0 text-pink-200'
-									size={20}
-									strokeWidth={1.5}
-								/>
-								<a
-									href='tel:+919672353320'
-									className='hover:text-pink-200 transition-colors'
-								>
-									+91 9672353320
-								</a>
-							</li>
-						</ul>
-					</div>
-				</div>
+          {/* Column 4: Contact Information */}
+          <div className='space-y-4'>
+            <h3 className='text-lg font-semibold text-white'>Get in Touch</h3>
+            <ul className='space-y-3 text-neutral-400'>
+              <li className='flex items-start'>
+                <MapPin
+                  className='mt-1 mr-3 flex-shrink-0 text-pink-200'
+                  size={20}
+                  strokeWidth={1.5}
+                />
+                <span>
+                  BITS Pilani, Pilani Campus, Vidya Vihar, Pilani 333031,
+                  Rajasthan, India
+                </span>
+              </li>
+              <li className='flex items-center'>
+                <Mail
+                  className='mr-3 flex-shrink-0 text-pink-200'
+                  size={20}
+                  strokeWidth={1.5}
+                />
+                <a
+                  href='mailto:genosaathi@gmail.com'
+                  className='hover:text-pink-200 transition-colors'
+                >
+                  genosaathi@gmail.com
+                </a>
+              </li>
+              <li className='flex items-center'>
+                <Phone
+                  className='mr-3 flex-shrink-0 text-pink-200'
+                  size={20}
+                  strokeWidth={1.5}
+                />
+                <a
+                  href='tel:+91967XXXX320'
+                  className='hover:text-pink-200 transition-colors'
+                >
+                  +91 967XXXX320
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
 
 				{/* Bottom Bar */}
 				<div className='mt-8 pt-8 border-t border-neutral-800 flex flex-col md:flex-row justify-between items-center text-center md:text-left'>
