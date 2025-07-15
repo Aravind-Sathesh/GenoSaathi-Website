@@ -3,7 +3,14 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ArrowRight, Calendar, User, LoaderCircle, Search } from 'lucide-react';
+import {
+  ArrowRight,
+  Calendar,
+  User,
+  LoaderCircle,
+  Search,
+  Edit,
+} from 'lucide-react';
 
 export default function BlogPage() {
 	const [blogs, setBlogs] = useState([]);
@@ -189,47 +196,75 @@ export default function BlogPage() {
 														{blog.excerpt}
 													</p>
 
-													<div className='mt-auto pt-4 border-t border-gray-100 flex justify-between items-center'>
-														<div className='flex items-center text-xs text-[#555555] space-x-3'>
-															<span className='flex items-center'>
-																<Calendar className='w-4 h-4 mr-1.5' />
-																{new Date(
-																	blog.created_at
-																).toLocaleDateString(
-																	'en-US',
-																	{
-																		month: 'short',
-																		day: 'numeric',
-																		year: 'numeric',
-																	}
-																)}
-															</span>
-															<span className='flex items-center'>
-																<User className='w-4 h-4 mr-1.5' />
-																{blog.author}
-															</span>
-														</div>
-														<span className='font-bold text-[#d64a8b] inline-flex items-center group-hover:text-[#c03974] transition-colors'>
-															<ArrowRight className='w-5 h-5 transition-transform duration-300 group-hover:translate-x-1' />
-														</span>
-													</div>
-												</div>
-											</div>
-										</Link>
-									</motion.div>
-								))
-							) : (
-								<div className='col-span-1 md:col-span-2 lg:col-span-3 text-center text-gray-500 py-16'>
-									<h3 className='text-2xl font-poppins'>
-										No posts found
-									</h3>
-									<p>Try adjusting your search term.</p>
-								</div>
-							)}
-						</motion.div>
-					)}
-				</div>
-			</div>
-		</div>
-	);
+                          <div className='mt-auto pt-4 border-t border-gray-100 flex justify-between items-center'>
+                            <div className='flex items-center text-xs text-[#555555] space-x-3'>
+                              <span className='flex items-center'>
+                                <Calendar className='w-4 h-4 mr-1.5' />
+                                {new Date(blog.created_at).toLocaleDateString(
+                                  'en-US',
+                                  {
+                                    month: 'short',
+                                    day: 'numeric',
+                                    year: 'numeric',
+                                  }
+                                )}
+                              </span>
+                              <span className='flex items-center'>
+                                <User className='w-4 h-4 mr-1.5' />
+                                {blog.author}
+                              </span>
+                            </div>
+                            <span className='font-bold text-[#d64a8b] inline-flex items-center group-hover:text-[#c03974] transition-colors'>
+                              <ArrowRight className='w-5 h-5 transition-transform duration-300 group-hover:translate-x-1' />
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                ))
+              ) : (
+                <div className='col-span-1 md:col-span-2 lg:col-span-3 text-center text-gray-500 py-16'>
+                  <h3 className='text-2xl font-poppins'>No posts found</h3>
+                  <p>Try adjusting your search term.</p>
+                </div>
+              )}
+            </motion.div>
+          )}
+        </div>
+      </div>
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.3, delay: 0.5 }}
+        className='fixed bottom-8 right-8 z-50'
+      >
+        <Link href='/admin/edit-blog'>
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className='group relative bg-gradient-to-r from-[#ee95bf] to-[#ee95bf] text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center'
+            style={{
+              background: 'linear-gradient(135deg, #ee95bf 0%, #ee95bf 100%)',
+              boxShadow: '0 8px 25px rgba(213, 114, 160, 0.3)',
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.boxShadow = '0 12px 35px rgba(214, 74, 139, 0.4)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.boxShadow = '0 8px 25px rgba(214, 74, 139, 0.3)';
+            }}
+          >
+            <Edit className='w-6 h-6 text-white' />
+
+            <div className='absolute bottom-full right-0 mb-2 px-3 py-1 bg-gray-800 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 whitespace-nowrap'>
+              Edit Blog Posts
+              <div className='absolute top-full right-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-gray-800'></div>
+            </div>
+          </motion.button>
+        </Link>
+      </motion.div>
+    </div>
+  );
 }
