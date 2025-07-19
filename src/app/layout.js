@@ -2,6 +2,7 @@ import { Inter, Poppins } from 'next/font/google';
 import './globals.css';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import GoogleAnalytics from './components/GoogleAnalytics';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -52,7 +53,7 @@ export const metadata = {
     images: ['/logo.jpeg'],
   },
   verification: {
-    google: 'your-google-verification-code-here',
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
   },
   alternates: {
     canonical: 'https://genosaathi.com',
@@ -68,6 +69,7 @@ export default function RootLayout({ children }) {
         <meta name='theme-color' content='#FCCFE8' />
       </head>
       <body className={`${inter.variable} ${poppins.variable} antialiased`}>
+        <GoogleAnalytics />
         <Navbar />
         <main>{children}</main>
         <Footer />
